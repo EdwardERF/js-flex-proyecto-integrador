@@ -1,23 +1,66 @@
-
+``
 const tienda = {
   carrito: [],
   agregarProducto(){
-    alert('Operación pendiente de programar.')
+    const nombreProducto = prompt("Ingrese el nombre del producto").toUpperCase()
+    const precioProducto = prompt("Ingrese el costo del producto")
+
+    const nuevoProducto = {
+      nombreProducto,
+      precioProducto
+    }
+    
+    tienda.carrito.push(nuevoProducto)
   },
-  quitarProducto(){
-    alert('Operación pendiente de programar.')
+  quitarUltimoProducto(){
+
+    if (tienda.carrito.length > 1) {
+      const ultimoProducto = tienda.carrito.pop()
+      alert(`Se ha eliminado el producto ${ultimoProducto.nombreProducto} del carrito.`)
+    } else {
+      alert('El carrito está vacío')
+    }
+
   },
   buscarProducto(){
-    alert('Operación pendiente de programar.')
+    const nombreProducto = prompt('Ingrese el producto a buscar').toUpperCase()
+
+    const consulta = tienda.carrito.findIndex(producto => producto.nombreProducto === nombreProducto)
+
+    if (consulta === -1) {
+      alert(`El producto ${nombreProducto} no está cargado en el carrito`)
+    } else {
+      alert(`El producto ${nombreProducto} está en la posición ${consulta+1}`)
+    }
+    
   },
   verCarrito(){
-    alert('Operación pendiente de programar.')
+
+    let carritoCompleto = ''
+
+    for (producto of tienda.carrito) {
+      carritoCompleto += `${producto.nombreProducto} - $${producto.precioProducto} \n`
+    }
+    
+    alert(carritoCompleto)
   },
   verTotalAPagar(){
-    alert('Operación pendiente de programar.')
+    let precioTotal = 0
+
+    for (producto of tienda.carrito) {
+      precioTotal += Number(producto.precioProducto)
+    }
+    
+    alert(`Total a pagar: ${precioTotal}`)
   },
   checkout(){
-    alert('Operación pendiente de programar.')
+
+    if (tienda.carrito.length === 0) {
+      alert('El carrito está vacío, no se puede hacer checkout.')
+    } else {
+      tienda.carrito.splice(0, tienda.carrito.length);
+      alert('La compra se ha generado con éxito. \nEl carrito ha quedado vacío.')
+    }
   }
 }
 
@@ -35,7 +78,7 @@ function seleccionarOperacion(operacion){
       tienda.agregarProducto()
       break;
     case 2:
-      tienda.quitarProducto()
+      tienda.quitarUltimoProducto()
       break;
     case 3:
       tienda.buscarProducto()
