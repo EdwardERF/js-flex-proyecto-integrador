@@ -113,8 +113,8 @@ function app () {
   alert('Gracias por utilizar la tienda de productos. \nQue tenga un buen día.')
 }
 
-// Genero un tiempo de espera para la ejecución de la app, de modo tal que doy tiempo para que se imprima la descripción del negocio, solicitada en la consigna.
-setTimeout(() => {
-  app()  
-}, 500);
+// // Genero un tiempo de espera para la ejecución de la app, de modo tal que doy tiempo para que se imprima la descripción del negocio, solicitada en la consigna.
+// setTimeout(() => {
+//   app()  
+// }, 500);
 
