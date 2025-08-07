@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "nombre": "Pan de molde",
+        "precio": 140
+    },
+    {
+        "id": 2,
+        "nombre": "Pan de molde integral",
+        "precio": 160
+    },
+    {
+        "id": 3,
+        "nombre": "Dulce de leche (1Kg)",
+        "precio": 150
+    },
+    {
+        "id": 4,
+        "nombre": "Dulce de membrillo (Paquete 250gr)",
+        "precio": 70
+    },
+    {
+        "id": 5,
+        "nombre": "Dulce de batata (Paquete 250gr)",
+        "precio": 80
+    },
+    {
+        "id": 6,
+        "nombre": "Leche entera",
+        "precio": 50
+    },
+    {
+        "id": 7,
+        "nombre": "Leche descremada",
+        "precio": 50
+    },
+    {
+        "id": 8,
+        "nombre": "Jamón (Paquete 100gr)",
+        "precio": 60
+    },
+    {
+        "id": 9,
+        "nombre": "Queso (Paquete 100gr)",
+        "precio": 60
+    }
+]
