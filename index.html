@@ -8,11 +8,29 @@
 </head>
 <body>
   <h1>Tienda de Productos para el desayuno</h1>
-  <h2>Elija lo necesario para comenzar bien la mañana</h2>
+  <h2 id="tituloSecundario">Elija lo necesario para comenzar bien la mañana</h2>
   
-  
+  <h3 id="tituloProductosDisponibles" class="tituloSecundario">Productos disponibles</h3>
+
   <div class="item">
-    <ul>Pan de molde</ul><input type="button" id="btnPanMolde" value="Comprar"></input type="button">
+    <ul>Pan de molde</ul><input type="button" id="btnPanMolde" value="Agregar"></input type="button">
+  </div>
+
+  <h3 id="tituloPreviaCarrito" class="tituloSecundario">Vista previa de Carrito</h3>
+
+  <div id="previaCarrito" class="previaCarrito">
+    <div class="item">
+    <ul>Pan de molde</ul><input type="button" id="btnPanMolde" value="Quitar"></input type="button">
+    </div>
+    <div class="item">
+    <ul>Pan de molde</ul><input type="button" id="btnPanMolde" value="Quitar"></input type="button">
+  </div>
+  <div id="precioTotal" class="item">
+    <ul>Total: $123</ul>
+  </div>
+
+    <input type="button" value="Volver" class="botonesCarrito" id="btnVolver">
+    <input type="button" value="Comprar" class="botonesCarrito" id="btnComprar">
   </div>
 
   <script src="js/main.js"></script>

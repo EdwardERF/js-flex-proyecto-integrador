@@ -18,3 +18,16 @@
   text-decoration: underline;
   color: rgb(0, 0, 151);
 }
+
+.tituloSecundario {
+  margin: auto 10px;
+}
+
+.botonesCarrito {
+  margin: auto 10px;
+}
+
+#precioTotal { 
+  font-weight: bold;
+  margin-bottom: 10px;
+}
