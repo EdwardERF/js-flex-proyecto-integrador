@@ -1,4 +1,3 @@
-``
 const tienda = {
   carrito: [],
   agregarProducto(){
@@ -139,15 +138,6 @@ const mostrarProductos = ()=>{
     div.appendChild(input)
 
     listaProductos.appendChild(div)
-
-    // `
-    //     <ul>Pan de molde</ul><input type="button" id="btnPanMolde" value="Quitar"></input type="button">
-    // `
-    // listaProductos.appendChild(ul)
-
-    // <div class="item">
-    // <ul>Pan de molde</ul><input type="button" id="btnPanMolde" value="Quitar"></input type="button">
-    // </div>
   })
 }
 
@@ -166,4 +156,20 @@ const traerProductos = async ()=>{
   }
 }
 
+const actualizarContadorCarrito = async ()=>{
+  try {
+    const productosCarrito = await fetch("./datos/carritoProductos.json")
+    const productosCarritoJSON = await productosCarrito.json()
+
+    console.log(productosCarritoJSON)
+
+    const contador = document.getElementById("tituloPreviaCarrito")
+    contador.innerHTML = `Carrito: ${productosCarritoJSON.length}`
+  } catch (error) {
+    console.warn("Este es el error:", error)
+    listaProductos.innerText = "Error 404, no se consiguieron los datos, intenta más tarde"
+  }
+}
+
+actualizarContadorCarrito()
 traerProductos()
