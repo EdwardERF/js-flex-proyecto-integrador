@@ -118,3 +118,52 @@ function app () {
 //   app()  
 // }, 500);
 
+const listaProductos = document.getElementById("productosDisponibles")
+let productos = []
+
+const mostrarProductos = ()=>{
+  listaProductos.innerHTML = ""
+  productos.forEach(prod =>{
+    const div = document.createElement("div")
+    div.className = 'item'
+
+    const ul = document.createElement("ul")
+    ul.innerHTML = `${prod.nombre} - $${prod.precio}`
+
+    const input = document.createElement("input")
+    input.type = 'button'
+    input.id = 'btnPanMolde'
+    input.value = 'Agregar'
+
+    div.appendChild(ul)
+    div.appendChild(input)
+
+    listaProductos.appendChild(div)
+
+    // `
+    //     <ul>Pan de molde</ul><input type="button" id="btnPanMolde" value="Quitar"></input type="button">
+    // `
+    // listaProductos.appendChild(ul)
+
+    // <div class="item">
+    // <ul>Pan de molde</ul><input type="button" id="btnPanMolde" value="Quitar"></input type="button">
+    // </div>
+  })
+}
+
+const traerProductos = async ()=>{
+  try {
+    const datosJson = await fetch("./datos/catalogoProductos.json") // pedimos info de la api
+    const datosProcesados = await datosJson.json() // la convertimos a js
+    console.log(datosProcesados)
+
+    // utilizamos los datos que conseguimos
+    productos = datosProcesados
+    mostrarProductos()
+  } catch (error) {
+    console.warn("Este es el error:", error)
+    listaProductos.innerText = "Error 404, no se consiguieron los datos, intenta más tarde"
+  }
+}
+
+traerProductos()
