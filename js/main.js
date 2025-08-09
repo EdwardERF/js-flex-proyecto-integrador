@@ -64,12 +64,15 @@ const tienda = {
     return precioTotal
   },
   checkout(){
-
     if (tienda.carrito.length === 0) {
       alert('El carrito está vacío, no se puede hacer checkout.')
     } else {
-      tienda.carrito.splice(0, tienda.carrito.length);
-      alert('La compra se ha generado con éxito. \nEl carrito ha quedado vacío.')
+      let carritoAprobado = confirm(`Confirma la compra del carrito por valor $${tienda.verTotalAPagar()}?`)
+
+      if (carritoAprobado) {
+        tienda.carrito.splice(0, tienda.carrito.length);
+        alert('La compra se ha generado con éxito. \nEl carrito ha quedado vacío.')
+      }
     }
     actualizarContadorCarrito()
     mostrarCarrito()
