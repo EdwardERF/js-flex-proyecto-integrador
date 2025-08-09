@@ -71,6 +71,8 @@ const tienda = {
       tienda.carrito.splice(0, tienda.carrito.length);
       alert('La compra se ha generado con éxito. \nEl carrito ha quedado vacío.')
     }
+    actualizarContadorCarrito()
+    mostrarCarrito()
   }
 }
 
@@ -222,6 +224,13 @@ const mostrarCarrito = ()=>{
   listaCarrito.appendChild(h3)
 }
 
+
+
+// Agrego evento para boton de comprar
+let btnComprar = document.getElementById("btnComprar")
+btnComprar.addEventListener("click", ()=>{
+  tienda.checkout()
+})
 
 actualizarContadorCarrito()
 traerProductos()
