@@ -117,6 +117,8 @@ function app () {
 //   app()  
 // }, 500);
 
+
+// Codigo para generar lista de productos disponibles
 const listaProductos = document.getElementById("productosDisponibles")
 let productos = []
 
@@ -131,7 +133,7 @@ const mostrarProductos = ()=>{
 
     const input = document.createElement("input")
     input.type = 'button'
-    input.id = 'btnPanMolde'
+    input.id = `btn${prod.id}`
     input.value = 'Agregar'
 
     div.appendChild(ul)
@@ -156,6 +158,7 @@ const traerProductos = async ()=>{
   }
 }
 
+// Codigo para mostrar contador de productos en el carrito.
 const actualizarContadorCarrito = async ()=>{
   try {
     const productosCarrito = await fetch("./datos/carritoProductos.json")
@@ -171,5 +174,47 @@ const actualizarContadorCarrito = async ()=>{
   }
 }
 
+
+// Codigo para listar los productos del carrito
+const listaCarrito = document.getElementById("previaCarrito")
+let carrito = []
+
+const mostrarCarrito = ()=>{
+  listaCarrito.innerHTML = ""
+  carrito.forEach(prod =>{
+    const div = document.createElement("div")
+    div.className = 'item'
+
+    const ul = document.createElement("ul")
+    ul.innerHTML = `${prod.nombre} - $${prod.precio}`
+
+    const input = document.createElement("input")
+    input.type = 'button'
+    input.id = `btn${prod.id}`
+    input.value = 'Quitar'
+
+    div.appendChild(ul)
+    div.appendChild(input)
+
+    listaCarrito.appendChild(div)
+  })
+}
+
+const traerCarrito = async ()=>{
+  try {
+    const datosJson = await fetch("./datos/carritoProductos.json") // pedimos info de la api
+    const datosProcesados = await datosJson.json() // la convertimos a js
+    console.log(datosProcesados)
+
+    // utilizamos los datos que conseguimos
+    carrito = datosProcesados
+    mostrarCarrito()
+  } catch (error) {
+    console.warn("Este es el error:", error)
+    listaCarrito.innerText = "Error 404, no se consiguieron los datos, intenta más tarde"
+  }
+}
+
 actualizarContadorCarrito()
 traerProductos()
+traerCarrito()
