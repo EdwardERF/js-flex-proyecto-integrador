@@ -1,15 +1,16 @@
 const tienda = {
   carrito: [],
-  agregarProducto(){
-    const nombreProducto = prompt("Ingrese el nombre del producto").toUpperCase()
-    const precioProducto = prompt("Ingrese el costo del producto")
-
+  agregarProducto(id, nombre, precio){
     const nuevoProducto = {
-      nombreProducto,
-      precioProducto
+      id,
+      nombre,
+      precio
     }
     
     tienda.carrito.push(nuevoProducto)
+
+    actualizarContadorCarrito()
+    mostrarCarrito()
   },
   quitarUltimoProducto(){
 
@@ -32,6 +33,16 @@ const tienda = {
       alert(`El producto ${nombreProducto} está en la posición ${consulta+1}`)
     }
     
+  },
+  eliminarPorId(id){
+    const index = tienda.carrito.findIndex(item => item.id === id)
+
+    if (index !== -1) {
+      tienda.carrito.splice(index, 1)
+    }
+
+    actualizarContadorCarrito()
+    mostrarCarrito()
   },
   verCarrito(){
 
@@ -136,6 +147,10 @@ const mostrarProductos = ()=>{
     input.id = `btn${prod.id}`
     input.value = 'Agregar'
 
+    input.addEventListener("click", ()=>{
+      tienda.agregarProducto(prod.id, prod.nombre, prod.precio)
+    })
+    
     div.appendChild(ul)
     div.appendChild(input)
 
@@ -161,27 +176,24 @@ const traerProductos = async ()=>{
 // Codigo para mostrar contador de productos en el carrito.
 const actualizarContadorCarrito = async ()=>{
   try {
-    const productosCarrito = await fetch("./datos/carritoProductos.json")
-    const productosCarritoJSON = await productosCarrito.json()
-
-    console.log(productosCarritoJSON)
-
     const contador = document.getElementById("tituloPreviaCarrito")
-    contador.innerHTML = `Carrito: ${productosCarritoJSON.length}`
+    contador.innerHTML = `Carrito: ${tienda.carrito.length}`
   } catch (error) {
     console.warn("Este es el error:", error)
-    listaProductos.innerText = "Error 404, no se consiguieron los datos, intenta más tarde"
   }
 }
 
 
 // Codigo para listar los productos del carrito
 const listaCarrito = document.getElementById("previaCarrito")
-let carrito = []
 
 const mostrarCarrito = ()=>{
-  listaCarrito.innerHTML = ""
-  carrito.forEach(prod =>{
+  if (tienda.carrito.length === 0) {
+    listaCarrito.innerHTML = "Carrito vacío!"
+  } else {
+    listaCarrito.innerHTML = ""
+  }
+  tienda.carrito.forEach(prod =>{
     const div = document.createElement("div")
     div.className = 'item'
 
@@ -194,8 +206,8 @@ const mostrarCarrito = ()=>{
     input.value = 'Quitar'
 
     input.addEventListener("click", ()=>{
-      // debo modificar la lista de carritoProductos, porque eso no se puede modificar. Esto debe ir por localStorage o memoria  
-    )
+      tienda.eliminarPorId(prod.id)
+    })
 
     div.appendChild(ul)
     div.appendChild(input)
@@ -204,21 +216,6 @@ const mostrarCarrito = ()=>{
   })
 }
 
-const traerCarrito = async ()=>{
-  try {
-    const datosJson = await fetch("./datos/carritoProductos.json") // pedimos info de la api
-    const datosProcesados = await datosJson.json() // la convertimos a js
-    console.log(datosProcesados)
-
-    // utilizamos los datos que conseguimos
-    carrito = datosProcesados
-    mostrarCarrito()
-  } catch (error) {
-    console.warn("Este es el error:", error)
-    listaCarrito.innerText = "Error 404, no se consiguieron los datos, intenta más tarde"
-  }
-}
 
 actualizarContadorCarrito()
 traerProductos()
-traerCarrito()
