@@ -167,7 +167,6 @@ const traerProductos = async ()=>{
   try {
     const datosJson = await fetch("./datos/catalogoProductos.json") // pedimos info de la api
     const datosProcesados = await datosJson.json() // la convertimos a js
-    console.log(datosProcesados)
 
     // utilizamos los datos que conseguimos
     productos = datosProcesados
