@@ -58,10 +58,10 @@ const tienda = {
     let precioTotal = 0
 
     for (producto of tienda.carrito) {
-      precioTotal += Number(producto.precioProducto)
+      precioTotal += Number(producto.precio)
     }
     
-    alert(`Total a pagar: ${precioTotal}`)
+    return precioTotal
   },
   checkout(){
 
@@ -214,6 +214,12 @@ const mostrarCarrito = ()=>{
 
     listaCarrito.appendChild(div)
   })
+
+  const h3 = document.createElement("h3")
+  h3.className = 'tituloSecundario'
+  h3.innerHTML = `Total: ${tienda.verTotalAPagar()}`
+
+  listaCarrito.appendChild(h3)
 }
 
 
