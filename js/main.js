@@ -193,6 +193,10 @@ const mostrarCarrito = ()=>{
     input.id = `btn${prod.id}`
     input.value = 'Quitar'
 
+    input.addEventListener("click", ()=>{
+      // debo modificar la lista de carritoProductos, porque eso no se puede modificar. Esto debe ir por localStorage o memoria  
+    )
+
     div.appendChild(ul)
     div.appendChild(input)
 
